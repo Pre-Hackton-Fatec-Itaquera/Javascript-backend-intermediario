@@ -1,0 +1,26 @@
+@baseSubjectsUrl = http://localhost:3333/subjects
+
+GET {{baseSubjectsUrl}}
+###
+
+GET {{baseSubjectsUrl}}/ID_AQUI
+###
+
+POST {{baseSubjectsUrl}}
+Content-Type: application/json
+
+{
+    "name": "Matemática",
+    "semester": 1
+}
+###
+
+PUT {{baseSubjectsUrl}}/ID_AQUI
+Content-Type: application/json
+
+{
+    "name": "Matemática Avançada"
+}
+###
+
+DELETE {{baseSubjectsUrl}}/ID_AQUI

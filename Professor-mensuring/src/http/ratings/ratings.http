@@ -1,0 +1,31 @@
+@baseRatingsUrl = http://localhost:3333/ratings
+
+GET {{baseRatingsUrl}}
+###
+
+GET {{baseRatingsUrl}}?professorSubjectId=7bad6554-9faf-4e90-87f4-142ed8f49775
+###
+
+GET {{baseRatingsUrl}}/ID_AQUI
+###
+
+POST {{baseRatingsUrl}}
+Content-Type: application/json
+
+{
+    "value": 5,
+    "comment": "Excelente professor!",
+    "professorSubjectId": "7bad6554-9faf-4e90-87f4-142ed8f49775"
+}
+###
+
+PUT {{baseRatingsUrl}}/ID_AQUI
+Content-Type: application/json
+
+{
+    "value": 4,
+    "comment": "Muito bom"
+}
+###
+
+DELETE {{baseRatingsUrl}}/ID_AQUI

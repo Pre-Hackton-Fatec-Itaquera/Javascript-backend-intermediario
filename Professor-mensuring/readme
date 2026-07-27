@@ -1,0 +1,99 @@
+# Professor Mensuring
+
+Backend intermediario em JavaScript para um sistema de avaliacao de professores.
+
+Este projeto foi pensado como material didatico para um mini-curso e para um contexto de pre-hackathon. A proposta e mostrar como um backend pequeno pode ser organizado de forma simples, clara e facil de estudar.
+
+## O que o sistema faz
+
+O projeto permite:
+
+1. Cadastrar professores.
+2. Cadastrar materias.
+3. Relacionar professor e materia.
+4. Registrar avaliacoes com nota de 1 a 5 e comentario opcional.
+5. Consultar a media das avaliacoes de um relacionamento.
+
+## O que foi deixado de fora de proposito
+
+Alguns itens nao foram incluidos porque o foco aqui e aprendizado do backend:
+
+1. Autenticacao de usuarios.
+2. Autorizacao por perfil.
+3. Frontend nesta etapa.
+4. Painel administrativo.
+
+Essa decisao ajuda a manter o projeto mais direto para quem esta aprendendo rotas, validacao, banco de dados e tratamento de erros.
+
+## Tecnologias usadas
+
+1. Fastify para a API HTTP.
+2. Zod para validacao de entrada e saida.
+3. Drizzle ORM para acesso ao banco.
+4. PostgreSQL como banco de dados.
+5. Swagger para documentacao automatica.
+6. Vitest para testes.
+
+## Como o projeto esta organizado
+
+O codigo foi separado por responsabilidade para facilitar o estudo:
+
+1. `src/server.ts` inicializa o servidor e registra plugins, rotas e tratamento de erros.
+2. `src/http/**/route` contem as rotas HTTP.
+3. `src/http/**/services` contem a regra de negocio.
+4. `src/http/**/repository` conversa com o banco.
+5. `src/http/**/schemas` define os contratos de dados com Zod.
+6. `src/handlers/errorHandler.ts` centraliza o tratamento de erros.
+7. `src/db/schemas` define as tabelas do banco.
+
+## Modelo de dados
+
+O banco foi desenhado para mostrar uma relacao mais realista entre entidades:
+
+1. `professor` guarda os professores.
+2. `subjects` guarda as materias.
+3. `professor_subject` cria o vinculo entre professor e materia.
+4. `ratings` guarda as avaliacoes feitas para cada vinculo.
+
+Esse modelo e util porque mostra, na pratica, como um relacionamento muitos-para-muitos funciona e por que uma tabela intermediaria faz sentido.
+
+## Rotas principais
+
+As rotas seguem a ideia de separar cada dominio da API:
+
+1. `GET /health` verifica se a API esta no ar.
+2. `GET /professor`, `POST /professor`, `GET /professor/:id`, `PUT /professor/:id`, `DELETE /professor/:id`.
+3. `GET /subjects`, `POST /subjects`, `GET /subjects/:id`, `PUT /subjects/:id`, `DELETE /subjects/:id`.
+4. `GET /professor-subject`, `POST /professor-subject`, `GET /professor-subject/:id`, `GET /professor-subject/:id/average`, `DELETE /professor-subject/:id`.
+5. `GET /ratings`, `POST /ratings`, `GET /ratings/:id`, `PUT /ratings/:id`, `DELETE /ratings/:id`.
+
+## Sobre os comentarios no codigo
+
+Os comentarios foram escritos com intencao didatica. Eles explicam o motivo das decisoes e ajudam o aluno a entender o fluxo do projeto sem depender apenas de uma explicacao oral.
+
+Para um projeto de ensino, isso e positivo. Se no futuro voce quiser transformar esse repositorio em uma versao mais enxuta, pode reduzir alguns comentarios repetidos.
+
+## Como rodar
+
+1. Instale as dependencias.
+2. Configure a variavel `DATABASE_URL`.
+3. Rode as migracoes.
+4. Inicie o servidor em modo desenvolvimento.
+
+Comandos uteis:
+
+```bash
+npm run dev
+npm run db:generate
+npm run db:migrate
+npm run db:studio
+```
+
+## Swagger
+
+A documentacao interativa fica disponivel em `/docs` quando o servidor estiver rodando.
+
+## Observacao final
+
+Este backend foi pensado para ensinar organizacao, validacao, relacoes no banco, tratamento de erros e leitura de API. A ideia nao e ter o projeto mais completo possivel, e sim um projeto facil de entender e bom para evoluir em sala de aula.
+

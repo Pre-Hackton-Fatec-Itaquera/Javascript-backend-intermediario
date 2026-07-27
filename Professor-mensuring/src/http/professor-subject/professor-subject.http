@@ -1,0 +1,24 @@
+@baseUrl = http://localhost:3333/professor-subject
+
+GET {{baseUrl}}
+###
+
+GET {{baseUrl}}?professorId=d38d46c5-26d3-46d7-991b-d48287deb466
+###
+
+GET {{baseUrl}}/ID_AQUI
+###
+
+GET {{baseUrl}}/ID_AQUI/average
+###
+
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "professorId": "d38d46c5-26d3-46d7-991b-d48287deb466",
+    "subjectId": "51be549c-edea-4871-abc8-21b34ba4e679"
+}
+###
+
+DELETE {{baseUrl}}/ID_AQUI
