@@ -1,0 +1,9 @@
+services: 
+  Hackton-Js-Intermediario:
+    image: bitnami/postgresql
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=hackton
+    ports:
+      - "5434:5432"

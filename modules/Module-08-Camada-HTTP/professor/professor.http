@@ -1,0 +1,25 @@
+@baseProfessorUrl = http://localhost:3333/professor
+
+GET {{baseProfessorUrl}}
+###
+
+GET {{baseProfessorUrl}}/992a401f-139d-4f9c-b437-536624335b14
+###
+
+POST {{baseProfessorUrl}}
+Content-Type: application/json
+
+{
+    "name": "Novo Professor 2"
+}
+###
+
+PUT {{baseProfessorUrl}}/d38d46c5-26d3-46d7-991b-d48287deb466
+Content-Type: application/json
+
+{
+    "name": "Jose"
+}
+###
+
+DELETE {{baseProfessorUrl}}/992a401f-139d-4f9c-b437-536624335b14
