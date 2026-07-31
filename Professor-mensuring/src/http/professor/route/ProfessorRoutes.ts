@@ -17,13 +17,19 @@ const prefix = "/professor"
 // NENHUMA lógica de negócio fica aqui. Se um if não for sobre
 // "qual status code retornar", ele não pertence à rota.
 export const getProfessor: FastifyPluginAsyncZod = async (server) => {
-    // GET /professor — lista todos
+    // GET /professor — lista todos ou filtra por nome.
+    // A busca fica aqui na rota porque o Fastify já entrega o `query`
+    // validado e o service recebe só o filtro que interessa.
     server.get(prefix, {
         schema: {
+            querystring: z.object({
+                name: z.string().optional(),
+            }),
             response: { 200: z.array(professorSchema) }
         }
-    }, async () => {
-        return await professorService.findAll()
+    }, async (request) => {
+        const { name } = request.query as { name?: string }
+        return await professorService.findAll({ name })
     })
 
     // GET /professor/:id — busca por ID

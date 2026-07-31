@@ -17,8 +17,10 @@
 import * as professorRepository from "#http/professor/repository/professorRepository.ts"
 import { NotFoundError } from "#errors/notFoundError"
 
-export const findAll = async () => {
-    return await professorRepository.findAll()
+export const findAll = async (filters?: { name?: string }) => {
+    // O service só encaminha o filtro para o repository.
+    // A regra de negócio continua aqui; a montagem do SQL fica isolada.
+    return await professorRepository.findAll(filters)
 }
 
 export const findById = async (id: string) => {
