@@ -16,10 +16,19 @@
 
 import { db } from "#db/connection.ts"
 import { schema } from "#db/schemas/index.ts"
-import { eq } from "drizzle-orm"
+import { eq, like } from "drizzle-orm"
 
-export const findAll = async () => {
-    return await db.select().from(schema.professor)
+export const findAll = async (filters: { name?: string } | undefined) => {
+     if (filters?.name) {
+        return await db
+            .select()
+            .from(schema.professor)
+            .where(like(schema.professor.name, `%${filters.name}%`))
+    }
+
+    return await db
+        .select()
+        .from(schema.professor)
 }
 
 export const findById = async (id: string) => {
